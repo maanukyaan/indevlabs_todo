@@ -23,7 +23,7 @@ export default function TodoItem({
   const [open, setOpen] = useState(false);
 
   return (
-    <li className="flex items-center justify-between rounded-xl bg-gray-100 p-5">
+    <li className="flex w-[49%] items-center justify-between rounded-xl bg-gray-100 p-5">
       <div className="flex items-center">
         <Checkbox
           checked={todo.completed}

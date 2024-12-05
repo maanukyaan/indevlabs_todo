@@ -23,13 +23,16 @@ const AddTodo: React.FC<AddTodoProps> = ({ addTodo }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mb-4">
+    <form
+      onSubmit={handleSubmit}
+      className="mb-4 flex flex-col items-center justify-center"
+    >
       <Input
         type="text"
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="📝 Add a new task..."
-        className="input input-bordered w-full"
+        className="input input-bordered w-2/3"
       />
       <Button type="submit" className="mt-2">
         Add Task ➕

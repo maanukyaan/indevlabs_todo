@@ -18,7 +18,7 @@ export default function TodoList({
           No tasks to show 😭
         </h2>
       ) : (
-        <ul className="flex flex-col gap-y-5">
+        <ul className="flex flex-wrap items-center justify-between gap-5">
           {todos.map((todo) => (
             <TodoItem
               key={todo.id}
