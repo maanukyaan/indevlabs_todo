@@ -82,8 +82,8 @@ export default function App() {
       });
       setTodos((prevTodos) =>
         prevTodos.map((t) =>
-          t.id === id ? { ...t, completed: !todo?.completed } : t
-        )
+          t.id === id ? { ...t, completed: !todo?.completed } : t,
+        ),
       );
       toast({
         title: `${todo?.completed ? "🤨 You cancelled the completed task" : "🎉 You completed the task!"}`,
@@ -103,7 +103,7 @@ export default function App() {
       <Toaster />
 
       <h1 className="mb-10 mt-5 text-center font-title text-3xl font-bold md:text-5xl">
-        Task WebApp 🪄
+        Task management WebApp 🪄
       </h1>
 
       <AddTodo addTodo={addTodo} />

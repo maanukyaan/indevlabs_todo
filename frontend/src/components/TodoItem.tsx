@@ -51,7 +51,7 @@ const TodoItem = ({ todo, deleteTodo, toggleTodo }: TodoItemProps) => {
             Are you sure you want to delete this task? 😖
           </AlertDialogTitle>
           <p>
-            <span className="text-gray-500">{todo.text}</span>
+            <span className="text-dark text-opacity-60">{todo.text}</span>
           </p>
           <AlertDialogAction onClick={() => deleteTodo(todo.id, todo.text)}>
             Yes, Delete 👿
