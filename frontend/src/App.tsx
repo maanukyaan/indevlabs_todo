@@ -10,6 +10,8 @@ interface Todo {
   completed: boolean;
 }
 
+const backendUrl = "http://localhost:3000";
+
 export default function App() {
   const { toast } = useToast();
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -17,7 +19,7 @@ export default function App() {
   useEffect(() => {
     const fetchTodos = async () => {
       try {
-        const response = await fetch("http://localhost:3000/todos");
+        const response = await fetch(`${backendUrl}/todos`);
         if (!response.ok) throw new Error("Failed to fetch tasks");
         const data = await response.json();
         setTodos(data);
@@ -34,7 +36,7 @@ export default function App() {
 
   const addTodo = async (text: string) => {
     try {
-      const newTodo = await fetch("http://localhost:3000/todos", {
+      const newTodo = await fetch(`${backendUrl}/todos`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text }),
@@ -57,7 +59,7 @@ export default function App() {
 
   const deleteTodo = async (id: number, text: string) => {
     try {
-      await fetch(`http://localhost:3000/todos/${id}`, { method: "DELETE" });
+      await fetch(`${backendUrl}/todos/${id}`, { method: "DELETE" });
       toast({
         title: "😔 ✅ Task deleted successfully",
         description: text,
@@ -75,16 +77,16 @@ export default function App() {
   const toggleTodo = async (id: number, text: string) => {
     try {
       const todo = todos.find((t) => t.id === id);
-      await fetch(`http://localhost:3000/todos/${id}/toggle`, {
+      await fetch(`${backendUrl}/todos/${id}/toggle`, {
         method: "POST",
       });
       setTodos((prevTodos) =>
         prevTodos.map((t) =>
-          t.id === id ? { ...t, completed: !todo?.completed } : t,
-        ),
+          t.id === id ? { ...t, completed: !todo?.completed } : t
+        )
       );
       toast({
-        title: `👀 Task status successfully toggled to ${todo?.completed ? "uncompleted" : "completed"}.`,
+        title: `${todo?.completed ? "🤨 You cancelled the completed task" : "🎉 You completed the task!"}`,
         description: text,
       });
     } catch (error) {
@@ -100,8 +102,8 @@ export default function App() {
     <div className="container mx-auto h-full p-4 font-main">
       <Toaster />
 
-      <h1 className="mb-10 mt-5 text-center font-title text-4xl font-bold md:text-5xl">
-        To-Do Task App 📝
+      <h1 className="mb-10 mt-5 text-center font-title text-3xl font-bold md:text-5xl">
+        Task WebApp 🪄
       </h1>
 
       <AddTodo addTodo={addTodo} />

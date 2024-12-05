@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useState } from "react";
+import { memo, useState } from "react";
 
 interface TodoItemProps {
   todo: { id: number; text: string; completed: boolean };
@@ -15,15 +15,19 @@ interface TodoItemProps {
   toggleTodo: (id: number, text: string) => void;
 }
 
-export default function TodoItem({
-  todo,
-  deleteTodo,
-  toggleTodo,
-}: TodoItemProps) {
+const areEqual = (prevProps: TodoItemProps, nextProps: TodoItemProps) => {
+  return (
+    prevProps.todo.id === nextProps.todo.id &&
+    prevProps.todo.text === nextProps.todo.text &&
+    prevProps.todo.completed === nextProps.todo.completed
+  );
+};
+
+const TodoItem = ({ todo, deleteTodo, toggleTodo }: TodoItemProps) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <li className="flex w-[49%] items-center justify-between rounded-xl bg-gray-100 p-5">
+    <li className="flex w-full items-center justify-between rounded-xl border bg-white p-5 shadow dark:bg-light lg:w-[49%]">
       <div className="flex items-center">
         <Checkbox
           checked={todo.completed}
@@ -33,7 +37,7 @@ export default function TodoItem({
         />
         <label
           htmlFor={String(todo.id)}
-          className={todo.completed ? "line-through" : ""}
+          className={`${todo.completed ? "line-through" : ""} text-dark`}
         >
           {todo.text}
         </label>
@@ -59,4 +63,6 @@ export default function TodoItem({
       </AlertDialog>
     </li>
   );
-}
+};
+
+export default memo(TodoItem, areEqual);

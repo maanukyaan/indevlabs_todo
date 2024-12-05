@@ -1,13 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+import { Plus } from "lucide-react";
 import { useState } from "react";
 
 interface AddTodoProps {
   addTodo: (text: string) => void;
 }
 
-const AddTodo: React.FC<AddTodoProps> = ({ addTodo }) => {
+export default function AddTodo({ addTodo }: AddTodoProps) {
   const { toast } = useToast();
 
   const [text, setText] = useState("");
@@ -25,20 +26,18 @@ const AddTodo: React.FC<AddTodoProps> = ({ addTodo }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="mb-4 flex flex-col items-center justify-center"
+      className="mb-5 flex flex-col items-center justify-center"
     >
       <Input
         type="text"
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="📝 Add a new task..."
-        className="input input-bordered w-2/3"
+        className="input input-bordered w-11/12 lg:w-1/2"
       />
-      <Button type="submit" className="mt-2">
-        Add Task ➕
+      <Button type="submit" variant="default" className="mt-5">
+        Add Task <Plus />
       </Button>
     </form>
   );
-};
-
-export default AddTodo;
+}

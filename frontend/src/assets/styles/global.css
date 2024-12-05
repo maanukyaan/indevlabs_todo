@@ -7,8 +7,22 @@
   }
 }
 
+:root {
+  --bg: #fcfcfc;
+  --text: #151515;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #151515;
+    --text: #fcfcfc;
+  }
+}
+
 html,
 body,
 #root {
   height: 100vh;
+  background-color: var(--bg);
+  color: var(--text);
 }
